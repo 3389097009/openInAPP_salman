@@ -10,6 +10,7 @@ export default {
       bulmaLight: '#F5F5F5',
       blue: '#0000FF',
       white: '#FFFFFF',
+      'btn-green': '#5AAC44',
     },
     fontFamily: {
       figtree: ['figtree'],

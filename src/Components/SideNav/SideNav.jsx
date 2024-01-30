@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const SideNav = () => {
   return (
     <div>
-      <div className="h-screen flex">
+      <div className="h-screen flex fixed">
         <div className={`flex flex-col  shadow  w-64`}>
           <div className="mx-auto mt-10">
             <img src={BaseLogo} alt="logo" />
@@ -17,7 +17,6 @@ const SideNav = () => {
           <ul className="pt-2 pb-4 space-y-1 text-sm mt-5 p-3">
             {routes &&
               routes.map((route, index) => {
-                console.log('roue', route);
                 return (
                   <li key={index} className="rounded-sm pt-5">
                     {/* <Link to={route.path}> */}
@@ -42,23 +41,6 @@ const SideNav = () => {
                 );
               })}
           </ul>
-          {/* {darkMode ? (
-            <button
-              className="flex mb-4 p-4 items-center w-60 h-12 dark-mode-button bg-purple"
-              onClick={handleDarkMode}
-            >
-              <img src={DarkMode} />
-              <h6 className="text-left ml-3 text-white">Dark Mode</h6>
-            </button>
-          ) : (
-            <button
-              className="flex mb-4 p-4 items-center w-60 h-12 dark-mode-button"
-              onClick={handleDarkMode}
-            >
-              <img src={LightMode} />
-              <h6 className="text-left ml-3">Light Mode</h6>
-            </button>
-          )} */}
         </div>
       </div>
     </div>

@@ -14,10 +14,19 @@ const UploadCsv = () => {
 
   const handleFileChange = (e) => {
     let file = e.target.files[0];
-    CsvToJson(file, (row) => {
-      setCsvData(row);
-      setUploading(false);
-    });
+    CsvToJson(
+      file,
+      (row) => {
+        setCsvData(row);
+        setUploading(false);
+      },
+      (row) => {
+        if (row['Prefix']) return true;
+        setUploading(false);
+        console.error('Please upload file with correct headers');
+        return false;
+      }
+    );
   };
 
   const handleTagSelection = (index, selectedTag) => {
@@ -52,13 +61,21 @@ const UploadCsv = () => {
 
   return (
     <div className="flex flex-col items-center">
+      <div className="">
+        <h3
+          className="font-semibold text-left font-figtree block md:hidden"
+          style={{ fontSize: '24px' }}
+        >
+          Upload CSV
+        </h3>
+      </div>
       <div className="bg-white rounded-lg flex justify-center items-center upload_container flex-col">
         <div className="browse_button flex justify-center items-center flex-col">
           <img src={ExcelIcon} alt="excel_icon" />
-          <h4 className="font-figtree text-lightTrunks text-base ">
+          <h4 className="font-figtree text-lightTrunks text-base mt-2">
             Drop your excel sheet here or
             <span
-              className="text-primary cursor-pointer"
+              className="text-primary cursor-pointer ml-1"
               onClick={handleButtonClick}
             >
               browse
@@ -132,9 +149,13 @@ const UploadCsv = () => {
                       <select
                         className="border p-1 rounded"
                         value=""
-                        onChange={(e) => handleTagSelection(index, e.target.value)}
+                        onChange={(e) =>
+                          handleTagSelection(index, e.target.value)
+                        }
                       >
-                        <option value="" disabled>Select Tag</option>
+                        <option value="" disabled>
+                          Select Tag
+                        </option>
                         {row['select tags'].split(',').map((tag, tagIndex) => (
                           <option key={tagIndex} value={tag.trim()}>
                             {tag.trim()}
@@ -143,22 +164,25 @@ const UploadCsv = () => {
                       </select>
                     </td>
                     <td className="p-4 text-14 font-semibold">
-                      {row['selected tags'].split(',').map((selectedTag, selectedTagIndex) => (
-                        selectedTag.trim() && (
-                          <span
-                            key={selectedTagIndex}
-                            className="mr-2 bg-blue text-white px-2 py-1 rounded"
-                          >
-                            {selectedTag.trim()}{' '}
+                      {row['selected tags'].split(',').map(
+                        (selectedTag, selectedTagIndex) =>
+                          selectedTag.trim() && (
                             <span
-                              className="cursor-pointer text-red-500"
-                              onClick={() => handleTagRemoval(index, selectedTag.trim())}
+                              key={selectedTagIndex}
+                              className="mr-2 bg-blue text-white px-2 py-1 rounded"
                             >
-                              X
+                              {selectedTag.trim()}
+                              <span
+                                className="cursor-pointer text-red-500"
+                                onClick={() =>
+                                  handleTagRemoval(index, selectedTag.trim())
+                                }
+                              >
+                                X
+                              </span>
                             </span>
-                          </span>
-                        )
-                      ))}
+                          )
+                      )}
                     </td>
                   </tr>
                   <tr>

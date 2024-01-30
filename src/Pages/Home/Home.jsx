@@ -5,11 +5,11 @@ import RightPanel from '../../Components/RightPanel/RightPanel';
 const Home = () => {
   return (
     <>
-      <div className="w-100 flex">
-        <div className="left_pane">
+      <div className="sm:w-100 sm:flex">
+        <div className="left_pane hidden md:flex">
           <SideNav />
         </div>
-        <div className="right_pane">
+        <div className="right_pane h-screen">
           <RightPanel />
         </div>
       </div>
