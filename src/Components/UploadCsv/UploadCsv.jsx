@@ -21,7 +21,7 @@ const UploadCsv = () => {
         setUploading(false);
       },
       (row) => {
-        if (row['Prefix']) return true;
+        if (row['prefix']) return true;
         setUploading(false);
         console.error('Please upload file with correct headers');
         return false;

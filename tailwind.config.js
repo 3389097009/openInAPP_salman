@@ -11,9 +11,11 @@ export default {
       blue: '#0000FF',
       white: '#FFFFFF',
       'btn-green': '#5AAC44',
+      leftBlue: '#605BFF',
     },
     fontFamily: {
       figtree: ['figtree'],
+      Montserrat: ['Montserrat']
     },
   },
   plugins: [],

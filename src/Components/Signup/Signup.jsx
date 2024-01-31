@@ -1,25 +1,33 @@
-import React from 'react';
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const registerUser = async (e) => {
-    console.log('button clicked');
     e.preventDefault();
+
+    // Check if all required fields are filled
+    if (name.length > 0 && email.length > 0 && password.length > 0) {
+      // Simulate registration logic (you would replace this with your API call)
+      console.log('Simulating registration for:', { name, email, password });
+
+      // After successful registration, navigate to the login page
+      navigate('/login');
+    } else {
+      alert('Please fill in all the details to register');
+    }
   };
 
   return (
     <>
       <div className="trello_logo flex justify-center">
-        {/* <img className="w-48" src={TrelloLogo} alt="trello-logo" /> */}
+        {/* Your logo or branding here */}
       </div>
-      <div className="flex justify-center items-center ">
+      <div className="flex justify-center items-center">
         <div className="w-full max-w-xs flex justify-center items-center">
           <div className="rounded-sm bg-white shadow-lg w-96 py-6 px-10">
             <form onSubmit={registerUser}>
@@ -30,6 +38,7 @@ const Signup = () => {
                   type="text"
                   placeholder="Name"
                   required
+                  value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
@@ -40,6 +49,7 @@ const Signup = () => {
                   type="email"
                   placeholder="Email"
                   required
+                  value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
@@ -49,22 +59,20 @@ const Signup = () => {
                   id="password"
                   type="password"
                   placeholder="Password"
+                  value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </div>
               <div className="flex items-center justify-center">
                 <input
-                  className="bg-btn-green w-full text-center text-white mt-4 py-2 px-5 cursor-pointer font-bold rounded  focus:outline-none focus:shadow-outline disabled:cursor-not-allowed disabled:opacity-50 disabled:border "
+                  className="bg-btn-green w-full text-center text-white mt-4 py-2 px-5 cursor-pointer font-bold rounded focus:outline-none focus:shadow-outline disabled:cursor-not-allowed disabled:opacity-50 disabled:border"
                   type="submit"
                   value="Register"
                   disabled={!name || !email || !password}
                 />
               </div>
             </form>
-            {/* <div className="flex justify-center mt-9">
-              <SocialLogin />
-            </div> */}
             <div className="mt-3 text-center">
               <span className="font-semibold text-sm">
                 Already have an account?
